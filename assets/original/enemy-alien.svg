@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 100">
+  <defs>
+    <linearGradient id="alienHull" x1="17" y1="20" x2="136" y2="79" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#efffd6"/>
+      <stop offset=".45" stop-color="#93f37c"/>
+      <stop offset="1" stop-color="#1f6738"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="75" cy="52" rx="62" ry="24" fill="url(#alienHull)" stroke="#f6ffe9" stroke-width="3"/>
+  <ellipse cx="75" cy="44" rx="28" ry="18" fill="#174b31" opacity=".74"/>
+  <circle cx="75" cy="42" r="8" fill="#caffad"/>
+  <path d="M26 53c16 20 82 20 98 0" fill="none" stroke="#0f3d28" stroke-width="6" stroke-linecap="round" opacity=".65"/>
+  <circle cx="35" cy="57" r="5" fill="#e6ffba"/>
+  <circle cx="115" cy="57" r="5" fill="#e6ffba"/>
+</svg>

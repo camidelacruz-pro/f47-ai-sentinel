@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 180">
+  <defs>
+    <linearGradient id="body" x1="55" y1="18" x2="160" y2="150" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e9fbff"/>
+      <stop offset="0.42" stop-color="#87cbe7"/>
+      <stop offset="1" stop-color="#315d82"/>
+    </linearGradient>
+    <linearGradient id="cockpit" x1="92" y1="28" x2="128" y2="76" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2b1730"/>
+      <stop offset="1" stop-color="#a23045"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <path d="M110 5 139 68 214 103 143 112 170 174 110 137 50 174 77 112 6 103 81 68Z" fill="#6fb8d8" opacity=".28" filter="url(#glow)"/>
+  <path d="M110 6 134 70 211 104 139 108 168 171 110 132 52 171 81 108 9 104 86 70Z" fill="url(#body)" stroke="#e6fbff" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M87 70 110 16 133 70 110 99Z" fill="#d6f4ff" opacity=".35"/>
+  <path d="M90 53 Q110 22 130 53 L121 77 Q110 83 99 77Z" fill="url(#cockpit)" stroke="#f8c9d1" stroke-opacity=".45" stroke-width="2"/>
+  <path d="M50 105 86 93 79 109 55 131Z" fill="#dff8ff" opacity=".42"/>
+  <path d="M170 105 134 93 141 109 165 131Z" fill="#dff8ff" opacity=".42"/>
+  <path d="M97 118 110 134 123 118" fill="none" stroke="#173855" stroke-width="4" stroke-linecap="round"/>
+  <path d="M75 111 36 123M145 111l39 12" stroke="#e8fbff" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="71" cy="101" r="3" fill="#ecfbff"/>
+  <circle cx="149" cy="101" r="3" fill="#ecfbff"/>
+</svg>

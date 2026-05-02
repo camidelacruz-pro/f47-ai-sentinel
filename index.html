@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>F-47 AI Sentinel</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main class="shell">
+      <section class="topbar">
+        <div>
+          <p class="eyebrow">F-47 AI Sentinel</p>
+          <h1>Six missions. One experimental fighter. Humanity on the line.</h1>
+        </div>
+        <div class="status-strip" aria-label="Game stats">
+          <span>Mission <strong id="missionReadout">1</strong></span>
+          <span>Score <strong id="scoreReadout">0</strong></span>
+          <span>Lives <strong id="livesReadout">3</strong></span>
+          <span>Hull <strong id="hullReadout">100</strong></span>
+          <span>AI <strong id="aiReadout">0.0s</strong></span>
+        </div>
+      </section>
+
+      <section class="game-frame">
+        <canvas id="gameCanvas" width="1280" height="720" aria-label="F-47 AI Sentinel game canvas"></canvas>
+
+        <div class="overlay active" id="startOverlay">
+          <div class="mission-card">
+            <img src="assets/original/bg-atmosphere.svg" alt="Original futuristic air combat backdrop">
+            <div>
+              <p class="eyebrow">Inspired by Asteroids</p>
+              <h2>F-47 AI Sentinel</h2>
+              <p>
+                Fly anywhere, rotate 360 degrees, shoot hostile drones, tanks, missiles,
+                mountains, asteroids, and alien ships. Catch the AI artifact to summon
+                defensive drones and answer humanity-focused questions to extend the power.
+              </p>
+              <button id="startButton" type="button">Start mission</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="overlay" id="pauseOverlay">
+          <div class="compact-card">
+            <p class="eyebrow">Paused</p>
+            <h2>Mission suspended</h2>
+            <p>Press P or click resume to return to combat.</p>
+            <button id="resumeButton" type="button">Resume</button>
+          </div>
+        </div>
+
+        <div class="overlay" id="quizOverlay">
+          <div class="quiz-card">
+            <p class="eyebrow">Level debrief</p>
+            <h2 id="questionText">Question</h2>
+            <div id="answerList" class="answers"></div>
+          </div>
+        </div>
+
+        <div class="overlay" id="endOverlay">
+          <div class="compact-card">
+            <p class="eyebrow" id="endKicker">Mission result</p>
+            <h2 id="endTitle">Simulation complete</h2>
+            <p id="endText">You made it through the sortie.</p>
+            <button id="restartButton" type="button">Fly again</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="controls">
+        <div>
+          <strong>Move</strong>
+          <span>W or Up to thrust, S or Down to brake, A/D or Left/Right to rotate</span>
+        </div>
+        <div>
+          <strong>Fight</strong>
+          <span>Space fires, Shift boosts, E releases EMP, P pauses</span>
+        </div>
+        <div>
+          <strong>AI artifact</strong>
+          <span>Catch the glowing AI icon for 10 seconds of drone support. After each mission, answer 3 questions to earn lives.</span>
+        </div>
+      </section>
+    </main>
+    <script src="game.js"></script>
+  </body>
+</html>

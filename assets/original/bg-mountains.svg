@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="storm" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#446275"/>
+      <stop offset=".55" stop-color="#172233"/>
+      <stop offset="1" stop-color="#06070b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#storm)"/>
+  <path d="M0 650 130 320 290 650 420 270 585 650 745 340 900 650 1045 285 1280 650v70H0Z" fill="#313b3d"/>
+  <path d="M0 720 180 455 310 720 520 390 680 720 890 425 1040 720 1280 510v210Z" fill="#151a1d"/>
+  <path d="M130 320 94 412h78M420 270l-54 120h102M1045 285l-60 138h118" fill="#a9c1c5" opacity=".38"/>
+</svg>

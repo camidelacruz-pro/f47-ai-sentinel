@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <radialGradient id="space" cx="70%" cy="20%" r="90%">
+      <stop offset="0" stop-color="#1a2448"/>
+      <stop offset=".45" stop-color="#080e22"/>
+      <stop offset="1" stop-color="#010207"/>
+    </radialGradient>
+    <radialGradient id="earth" cx="42%" cy="35%" r="55%">
+      <stop offset="0" stop-color="#94f0ff"/>
+      <stop offset=".38" stop-color="#2073d0"/>
+      <stop offset=".72" stop-color="#0c3270"/>
+      <stop offset="1" stop-color="#071126"/>
+    </radialGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#space)"/>
+  <circle cx="210" cy="770" r="370" fill="url(#earth)" opacity=".9"/>
+  <path d="M0 486C140 432 226 456 342 410c112-45 215-92 350-62" stroke="#72e5ff" stroke-width="9" opacity=".2" fill="none"/>
+  <g fill="#fff" opacity=".72">
+    <circle cx="150" cy="90" r="2"/><circle cx="410" cy="160" r="1.7"/><circle cx="680" cy="85" r="2.2"/><circle cx="1015" cy="160" r="1.6"/><circle cx="1190" cy="310" r="2"/>
+    <circle cx="910" cy="455" r="1.4"/><circle cx="560" cy="540" r="2.1"/><circle cx="118" cy="330" r="1.4"/><circle cx="760" cy="250" r="1.6"/>
+  </g>
+</svg>

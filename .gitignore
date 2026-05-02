@@ -1,0 +1,8 @@
+# Local server / OS noise
+.DS_Store
+output/
+tmp/
+
+# Unused local inspiration screenshots copied during prototyping.
+# The playable game uses original assets under assets/original/.
+assets/f47-*.png
