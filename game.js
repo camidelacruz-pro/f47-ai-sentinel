@@ -215,6 +215,12 @@ function buildQuestionBank() {
 }
 
 const keys = new Set();
+const codexAutopilotEnabled = new URLSearchParams(window.location.search).has("codexAutoplay");
+const codexAutopilot = {
+  fireClock: 0,
+  empClock: 0,
+  flareClock: 0
+};
 const stars = Array.from({ length: 160 }, () => ({
   x: Math.random() * canvas.width,
   y: Math.random() * canvas.height,
@@ -327,6 +333,7 @@ function update(dt) {
   if (game.state !== "playing") return;
   const player = game.player;
   const mission = missions[game.level];
+  if (codexAutopilotEnabled) updateCodexAutopilot(dt);
   game.time += dt;
   game.waveClock -= dt;
   game.artifactClock -= dt;
@@ -383,6 +390,86 @@ function update(dt) {
   handleCollisions();
   checkLevelProgress();
   syncUi();
+}
+
+function updateCodexAutopilot(dt) {
+  const player = game.player;
+  const controlledKeys = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "KeyA", "KeyD", "KeyW", "KeyS", "Space", "ShiftLeft", "KeyE", "KeyF"];
+  controlledKeys.forEach(code => keys.delete(code));
+
+  codexAutopilot.fireClock -= dt;
+  codexAutopilot.empClock -= dt;
+  codexAutopilot.flareClock -= dt;
+
+  const hostilePressure = game.enemies.length + game.enemyBullets.length * 0.65;
+  const pickup = chooseAutopilotPickup();
+  const nearestEnemy = game.enemies.length ? nearest(player, game.enemies) : null;
+  const target = pickup || nearestEnemy || { x: canvas.width * 0.5, y: canvas.height * 0.42 };
+  const targetVector = wrappedVector(player, target);
+  const targetAngle = Math.atan2(targetVector.y, targetVector.x);
+  const turn = angleDelta(targetAngle, player.angle);
+  player.angle = rotateToward(player.angle, targetAngle, dt * 5.8);
+
+  if (turn > 0.08) keys.add("KeyD");
+  if (turn < -0.08) keys.add("KeyA");
+
+  const targetDistance = Math.hypot(targetVector.x, targetVector.y);
+  const aligned = Math.abs(turn) < 0.38;
+  if (aligned || pickup || targetDistance > 160) keys.add("KeyW");
+  if (!pickup && targetDistance < 92 && !aligned) keys.add("KeyS");
+  if ((pickup && targetDistance > 210) || hostilePressure > 7) keys.add("ShiftLeft");
+
+  if (nearestEnemy) {
+    const enemyVector = wrappedVector(player, nearestEnemy);
+    const enemyAngle = Math.atan2(enemyVector.y, enemyVector.x);
+    const enemyTurn = Math.abs(angleDelta(enemyAngle, player.angle));
+    if (enemyTurn < 0.7 && codexAutopilot.fireClock <= 0) {
+      player.angle = enemyAngle;
+      player.fireCooldown = 0;
+    }
+    if (enemyTurn < 0.55 || targetDistance < 140 || codexAutopilot.fireClock <= 0) {
+      keys.add("Space");
+      codexAutopilot.fireClock = 0.12;
+    }
+  }
+
+  if ((hostilePressure > 6 || player.hull < 42) && player.empCooldown <= 0 && codexAutopilot.empClock <= 0) {
+    keys.add("KeyE");
+    codexAutopilot.empClock = 2.4;
+  }
+
+  if (game.enemyBullets.length > 1 && player.flareCooldown <= 0 && codexAutopilot.flareClock <= 0) {
+    keys.add("KeyF");
+    codexAutopilot.flareClock = 1.4;
+  }
+}
+
+function chooseAutopilotPickup() {
+  if (!game.artifacts.length) return null;
+  const typed = type => game.artifacts.filter(artifact => artifact.type === type);
+  if (game.player.hull < 76 && typed("shield").length) return nearest(game.player, typed("shield"));
+  if (typed("ai").length && game.player.aiTimer <= 0) return nearest(game.player, typed("ai"));
+  if (typed("emp").length) return nearest(game.player, typed("emp"));
+  return nearest(game.player, game.artifacts);
+}
+
+function wrappedVector(from, to) {
+  let dx = to.x - from.x;
+  let dy = to.y - from.y;
+  if (dx > canvas.width / 2) dx -= canvas.width;
+  if (dx < -canvas.width / 2) dx += canvas.width;
+  if (dy > canvas.height / 2) dy -= canvas.height;
+  if (dy < -canvas.height / 2) dy += canvas.height;
+  return { x: dx, y: dy };
+}
+
+function angleDelta(target, current) {
+  return Math.atan2(Math.sin(target - current), Math.cos(target - current));
+}
+
+function rotateToward(current, target, maxStep) {
+  const delta = angleDelta(target, current);
+  return current + clamp(delta, -maxStep, maxStep);
 }
 
 function fireBullet(x, y, angle, owner) {
@@ -673,6 +760,9 @@ function askQuestion() {
     button.addEventListener("click", () => answerQuestion(index === question.correct));
     ui.answerList.appendChild(button);
   });
+  if (codexAutopilotEnabled) {
+    setTimeout(() => answerQuestion(true), 650);
+  }
 }
 
 function answerQuestion(correct) {
@@ -1408,6 +1498,10 @@ window.addEventListener("keyup", event => {
 ui.startButton.addEventListener("click", startGame);
 ui.resumeButton.addEventListener("click", togglePause);
 ui.restartButton.addEventListener("click", startGame);
+
+if (codexAutopilotEnabled) {
+  setTimeout(startGame, 250);
+}
 
 resetGame();
 requestAnimationFrame(gameLoop);
