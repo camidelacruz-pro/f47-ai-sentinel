@@ -4,6 +4,12 @@ A browser-based arcade combat game inspired by classic asteroid shooters.
 
 Fly an original F-47-inspired aircraft through twelve long escalating missions, collect AI powerups for drone support, grab EMP cores for instant shockwaves, activate shield cores when the fight gets dangerous, and answer unique debrief questions between levels to earn extra lives.
 
+## Visual Tease
+
+[Watch the Singularity Gate assault teaser](captures/f47-singularity-assault.mp4)
+
+![Singularity Gate assault preview](captures/f47-singularity-preview.jpg)
+
 ## Play
 
 Open `index.html` in a browser, or run a local static server:

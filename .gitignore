@@ -2,6 +2,7 @@
 .DS_Store
 output/
 tmp/
+captures/f47-intense-frames/
 
 # Unused local inspiration screenshots copied during prototyping.
 # The playable game uses original assets under assets/original/.

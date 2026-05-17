@@ -215,7 +215,10 @@ function buildQuestionBank() {
 }
 
 const keys = new Set();
-const codexAutopilotEnabled = new URLSearchParams(window.location.search).has("codexAutoplay");
+const codexParams = new URLSearchParams(window.location.search);
+const codexAutopilotEnabled = codexParams.has("codexAutoplay");
+const codexCinematicEnabled = codexParams.has("codexCinematic");
+const codexCinematicMission = Number(codexParams.get("codexMission"));
 const codexAutopilot = {
   fireClock: 0,
   empClock: 0,
@@ -314,9 +317,28 @@ function seedLevel() {
 
 function startGame() {
   resetGame();
+  if (codexAutopilotEnabled && Number.isInteger(codexCinematicMission)) {
+    game.level = clamp(codexCinematicMission - 1, 0, missions.length - 1);
+    seedLevel();
+  }
+  if (codexAutopilotEnabled && codexCinematicEnabled) seedCodexCinematicEncounter();
   game.state = "playing";
   ui.startOverlay.classList.remove("active");
   ui.endOverlay.classList.remove("active");
+}
+
+function seedCodexCinematicEncounter() {
+  const types = ["alien", "asteroid", "fighter", "drone", "launcher", "alien", "asteroid", "fighter"];
+  types.forEach(type => spawnEnemy(type, 1));
+  spawnPowerup("ai");
+  spawnPowerup("emp");
+  spawnPowerup("shield");
+  game.artifactClock = 5;
+  game.empArtifactClock = 8;
+  game.shieldArtifactClock = 10;
+  game.waveClock = 0.2;
+  game.message = `Mission ${game.level + 1}: ${missions[game.level].name} - cinematic assault`;
+  game.messageClock = 3;
 }
 
 function togglePause() {
