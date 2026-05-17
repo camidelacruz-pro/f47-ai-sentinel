@@ -38,106 +38,181 @@ const missions = [
   {
     name: "Training Simulation",
     briefing: "Unarmed drones test rotation, shooting, and spatial control.",
-    quota: 16,
+    quota: 32,
     sky: ["#86d7ff", "#113c62"],
     enemy: "drone",
-    spawn: 1.1,
+    spawn: 1.25,
     maxEnemies: 7
   },
   {
     name: "Armor Breaker",
     briefing: "Ground tanks and missile launchers fire tracking rockets.",
-    quota: 24,
+    quota: 44,
     sky: ["#25435d", "#0a1321"],
     enemy: "ground",
-    spawn: 0.95,
+    spawn: 1.08,
     maxEnemies: 9
   },
   {
     name: "Contested Airspace",
     briefing: "Ground batteries combine with hostile planes and drones.",
-    quota: 32,
+    quota: 58,
     sky: ["#13263a", "#08101c"],
     enemy: "mixed",
-    spawn: 0.78,
-    maxEnemies: 12
+    spawn: 0.98,
+    maxEnemies: 11
   },
   {
     name: "Mountain Needle",
     briefing: "Fly through rising terrain while all previous threats converge.",
-    quota: 40,
+    quota: 72,
     sky: ["#20364a", "#090c13"],
     enemy: "mountain",
-    spawn: 0.68,
-    maxEnemies: 13
+    spawn: 0.9,
+    maxEnemies: 12,
+    mountains: true
+  },
+  {
+    name: "Blackout Canyon",
+    briefing: "Radar flickers while drones and launchers ambush the low pass.",
+    quota: 88,
+    sky: ["#1d3545", "#06090f"],
+    enemy: "canyon",
+    spawn: 0.84,
+    maxEnemies: 13,
+    mountains: true
+  },
+  {
+    name: "Skyhook Fortress",
+    briefing: "A moving air-defense grid guards orbital launch towers.",
+    quota: 104,
+    sky: ["#293448", "#080a13"],
+    enemy: "fortress",
+    spawn: 0.8,
+    maxEnemies: 14
+  },
+  {
+    name: "Drone Monsoon",
+    briefing: "Small machines swarm in fast, messy waves around missile fire.",
+    quota: 122,
+    sky: ["#18394e", "#070b12"],
+    enemy: "swarm",
+    spawn: 0.72,
+    maxEnemies: 17
   },
   {
     name: "Orbital Shatterfield",
     briefing: "Asteroids replace aircraft. Break them before they crowd the orbit.",
-    quota: 46,
+    quota: 140,
     sky: ["#081321", "#02030a"],
     enemy: "asteroid",
-    spawn: 0.6,
-    maxEnemies: 16
+    spawn: 0.74,
+    maxEnemies: 17
+  },
+  {
+    name: "Comet Harvest",
+    briefing: "Rock clusters split apart while alien scouts probe the perimeter.",
+    quota: 160,
+    sky: ["#0a1324", "#02030a"],
+    enemy: "comet",
+    spawn: 0.66,
+    maxEnemies: 19
   },
   {
     name: "Alien Belt",
-    briefing: "Asteroids and fast alien ships swarm the final corridor.",
-    quota: 60,
+    briefing: "Asteroids and fast alien ships swarm a hostile corridor.",
+    quota: 184,
     sky: ["#0b1022", "#03020a"],
     enemy: "alien",
-    spawn: 0.48,
-    maxEnemies: 18
+    spawn: 0.62,
+    maxEnemies: 20
+  },
+  {
+    name: "Mothership Wake",
+    briefing: "Alien ships coordinate with ground-style batteries in orbit.",
+    quota: 208,
+    sky: ["#11102a", "#02020a"],
+    enemy: "mothership",
+    spawn: 0.58,
+    maxEnemies: 22
+  },
+  {
+    name: "Singularity Gate",
+    briefing: "The final belt twists every threat into one relentless storm.",
+    quota: 236,
+    sky: ["#160d26", "#030106"],
+    enemy: "singularity",
+    spawn: 0.52,
+    maxEnemies: 24
   }
 ];
 
-const questions = [
-  {
-    q: "Why should powerful AI systems help humanity?",
-    a: [
-      "Because intelligence is most valuable when it reduces suffering and expands human potential.",
-      "Because humans should stop making decisions.",
-      "Because speed matters more than values."
-    ],
-    correct: 0
-  },
-  {
-    q: "What is the best partnership between pilots and AI?",
-    a: [
-      "AI replaces judgment completely.",
-      "Humans set goals and values while AI amplifies perception, safety, and response time.",
-      "AI only follows orders without context."
-    ],
-    correct: 1
-  },
-  {
-    q: "Which mission shows AI helping humankind responsibly?",
-    a: [
-      "Ignoring civilian safety to finish faster.",
-      "Sharing clear reasoning, protecting people, and staying accountable to human direction.",
-      "Hiding uncertainty so the user feels confident."
-    ],
-    correct: 1
-  },
-  {
-    q: "When danger increases, what should AI prioritize?",
-    a: [
-      "Transparent help that preserves life and supports good human choices.",
-      "The most dramatic action.",
-      "Winning without explaining tradeoffs."
-    ],
-    correct: 0
-  },
-  {
-    q: "What makes AI power worthy of trust?",
-    a: [
-      "Mystery and total control.",
-      "Useful capability aligned with human dignity, consent, and safety.",
-      "Never asking questions."
-    ],
-    correct: 1
-  }
-];
+const questions = buildQuestionBank();
+
+function buildQuestionBank() {
+  const subjects = [
+    ["medical care", "protect patient dignity, explain uncertainty, and help clinicians act sooner", "hide uncertainty to appear confident", "replace compassion with automation"],
+    ["education", "adapt to each learner while keeping teachers and curiosity at the center", "make every student learn the same way", "grade people without context"],
+    ["disaster response", "find danger faster, coordinate relief, and keep people informed", "optimize only for speed", "ignore local responders"],
+    ["scientific discovery", "test ideas faster while keeping evidence and peer review important", "declare results before checking them", "choose exciting claims over truth"],
+    ["accessibility", "remove barriers so more people can communicate, move, learn, and create", "make tools only for expert users", "treat access as an optional luxury"],
+    ["climate work", "help people measure risks, reduce waste, and plan resilient communities", "hide tradeoffs from the public", "focus only on short-term convenience"],
+    ["creative work", "amplify human imagination while respecting consent, credit, and craft", "copy creators without permission", "make every artwork look the same"],
+    ["public safety", "support careful decisions with transparency, oversight, and human accountability", "punish people by prediction alone", "remove all human review"],
+    ["small businesses", "handle repetitive work so owners can spend more time serving people", "make customers feel unheard", "prioritize automation over trust"],
+    ["transportation", "reduce accidents, improve routing, and assist human operators under pressure", "ignore edge cases", "rush decisions without explaining risk"],
+    ["food systems", "reduce waste, predict shortages, and help farms use resources wisely", "favor wasteful abundance", "ignore local needs"],
+    ["mental health support", "offer safe guidance, crisis routing, and encouragement to seek human care", "pretend to replace therapists entirely", "give absolute advice without context"],
+    ["elder care", "support independence, reminders, connection, and caregiver awareness", "isolate people from loved ones", "treat care as only a scheduling problem"],
+    ["language translation", "help people understand each other across cultures with nuance and respect", "erase cultural meaning", "translate words without context"],
+    ["cybersecurity", "spot threats quickly and help defenders protect people’s data", "hide attacks to avoid panic", "collect secrets without permission"],
+    ["law and justice", "improve access to information while preserving due process and human judgment", "decide guilt automatically", "make legal help more confusing"],
+    ["city planning", "model traffic, housing, and services while listening to residents", "optimize maps but ignore people", "make neighborhoods less human"],
+    ["space exploration", "extend human reach while keeping crews safe and science honest", "take reckless risks for spectacle", "treat explorers as replaceable"],
+    ["journalism", "help verify facts and summarize data while protecting truth and sources", "write convincing misinformation", "reward speed over accuracy"],
+    ["democracy", "inform people clearly and protect participation without manipulation", "persuade people secretly", "bury inconvenient facts"],
+    ["environmental protection", "detect harm earlier and guide restoration with measurable evidence", "greenwash bad choices", "ignore affected communities"],
+    ["family life", "save time on routine tasks so people can be more present with each other", "turn relationships into metrics", "make every choice automatic"],
+    ["workplace safety", "warn teams about hazards and reduce preventable injuries", "blame workers without context", "hide risks from managers"],
+    ["human learning", "make people more capable, not dependent, by explaining the reasoning", "give answers that prevent understanding", "reward memorization only"],
+    ["global cooperation", "share knowledge across borders while respecting cultures and rights", "centralize power without accountability", "treat one country’s needs as universal"]
+  ];
+  const frames = [
+    subject => ({
+      q: `In ${subject[0]}, what is the best way for AI to help humanity?`,
+      correct: subject[1],
+      wrong: [subject[2], subject[3]]
+    }),
+    subject => ({
+      q: `What would responsible AI avoid when supporting ${subject[0]}?`,
+      correct: subject[2],
+      wrong: [subject[1], "asking humans for feedback and correction"]
+    }),
+    subject => ({
+      q: `Why should humans stay involved when AI works in ${subject[0]}?`,
+      correct: "Because values, context, and accountability need human judgment.",
+      wrong: ["Because AI should never be useful.", "Because slower choices are always better."]
+    }),
+    subject => ({
+      q: `What makes an AI tool trustworthy in ${subject[0]}?`,
+      correct: "It is transparent, useful, contestable, and aligned with human wellbeing.",
+      wrong: ["It never admits uncertainty.", "It makes decisions no one can question."]
+    })
+  ];
+  return subjects.flatMap((subject, subjectIndex) =>
+    frames.map((frame, frameIndex) => {
+      const item = frame(subject);
+      const answers = [item.correct, ...item.wrong];
+      const shift = (subjectIndex + frameIndex) % 3;
+      const rotated = answers.slice(shift).concat(answers.slice(0, shift));
+      return {
+        q: item.q,
+        a: rotated,
+        correct: rotated.indexOf(item.correct)
+      };
+    })
+  );
+}
 
 const keys = new Set();
 const stars = Array.from({ length: 160 }, () => ({
@@ -167,9 +242,12 @@ function resetGame() {
     levelKills: 0,
     waveClock: 0,
     artifactClock: 11,
+    empArtifactClock: 18,
+    shieldArtifactClock: 28,
     debriefNextLevel: null,
     debriefQuestionsLeft: 0,
     askedDebriefQuestions: [],
+    usedQuestionIndexes: [],
     message: "Mission 1: Training Simulation",
     messageClock: 4,
     shake: 0,
@@ -183,13 +261,16 @@ function resetGame() {
       hull: 100,
       fireCooldown: 0,
       empCooldown: 0,
+      flareCooldown: 0,
       boostHeat: 0,
       invincible: 2,
+      shieldTimer: 0,
       aiTimer: 0,
       drones: []
     },
     bullets: [],
     enemyBullets: [],
+    flares: [],
     enemies: [],
     particles: [],
     artifacts: [],
@@ -203,11 +284,14 @@ function resetGame() {
 function seedLevel() {
   game.enemies.length = 0;
   game.enemyBullets.length = 0;
+  game.flares.length = 0;
   game.artifacts.length = 0;
   game.mountains.length = 0;
   game.levelKills = 0;
   game.waveClock = 0;
   game.artifactClock = 8;
+  game.empArtifactClock = rand(12, 18);
+  game.shieldArtifactClock = rand(24, 34);
   game.player.x = canvas.width * 0.5;
   game.player.y = canvas.height * 0.58;
   game.player.vx = 0;
@@ -217,7 +301,7 @@ function seedLevel() {
   game.messageClock = 4;
   game.activeQuestion = null;
   ui.quizOverlay.classList.remove("active");
-  if (game.level === 3) {
+  if (missions[game.level].mountains) {
     for (let i = 0; i < 6; i += 1) spawnMountain(i * 240);
   }
 }
@@ -246,6 +330,8 @@ function update(dt) {
   game.time += dt;
   game.waveClock -= dt;
   game.artifactClock -= dt;
+  game.empArtifactClock -= dt;
+  game.shieldArtifactClock -= dt;
   game.messageClock -= dt;
   game.shake = Math.max(0, game.shake - dt * 18);
 
@@ -276,20 +362,24 @@ function update(dt) {
   wrap(player);
   player.fireCooldown -= dt;
   player.empCooldown -= dt;
+  player.flareCooldown -= dt;
   player.invincible -= dt;
+  player.shieldTimer = Math.max(0, player.shieldTimer - dt);
   player.aiTimer = Math.max(0, player.aiTimer - dt);
 
   if (keys.has("Space") && player.fireCooldown <= 0) fireBullet(player.x, player.y, player.angle, "player");
   if (keys.has("KeyE") && player.empCooldown <= 0) triggerEmp();
+  if (keys.has("KeyF") && player.flareCooldown <= 0) deployFlares();
 
   updateAiDrones(dt);
   updateBullets(dt);
   updateEnemies(dt);
   updateArtifacts(dt);
+  updateFlares(dt);
   updateParticles(dt);
   updateMountains(dt);
   maybeSpawnEnemy(dt, mission);
-  maybeSpawnArtifact();
+  maybeSpawnPowerups();
   handleCollisions();
   checkLevelProgress();
   syncUi();
@@ -309,17 +399,41 @@ function fireBullet(x, y, angle, owner) {
   if (owner === "player") game.player.fireCooldown = game.player.aiTimer > 0 ? 0.09 : 0.16;
 }
 
-function triggerEmp() {
+function triggerEmp(power = 1) {
   const player = game.player;
-  player.empCooldown = 8;
-  game.shake = 8;
-  game.particles.push({ type: "ring", x: player.x, y: player.y, radius: 10, life: 0.7, maxLife: 0.7, color: "#6ff1ff" });
+  const radius = power > 1 ? 340 : 190;
+  player.empCooldown = power > 1 ? Math.max(2, player.empCooldown) : 8;
+  game.shake = power > 1 ? 14 : 8;
+  game.particles.push({ type: "ring", x: player.x, y: player.y, radius: 10, life: 0.8, maxLife: 0.8, color: power > 1 ? "#ffd36e" : "#6ff1ff" });
   for (const enemy of game.enemies) {
-    if (distance(player, enemy) < 190) damageEnemy(enemy, 2);
+    if (distance(player, enemy) < radius) damageEnemy(enemy, power > 1 ? 5 : 2);
   }
   for (const bullet of game.enemyBullets) {
-    if (distance(player, bullet) < 230) bullet.life = 0;
+    if (distance(player, bullet) < radius + 60) bullet.life = 0;
   }
+}
+
+function deployFlares() {
+  const player = game.player;
+  const rearAngle = player.angle + Math.PI;
+  const baseX = player.x + Math.cos(rearAngle) * 34;
+  const baseY = player.y + Math.sin(rearAngle) * 34;
+  player.flareCooldown = 1.1;
+  for (let i = 0; i < 7; i += 1) {
+    const spread = rearAngle + rand(-0.62, 0.62);
+    const speed = rand(160, 260);
+    game.flares.push({
+      x: baseX + rand(-4, 4),
+      y: baseY + rand(-4, 4),
+      vx: Math.cos(spread) * speed + player.vx * 0.18,
+      vy: Math.sin(spread) * speed + player.vy * 0.18,
+      radius: rand(6, 10),
+      life: rand(2.3, 3.2),
+      maxLife: 3.2,
+      pulse: rand(0, Math.PI * 2)
+    });
+  }
+  burst(baseX, baseY, "#ffb86b", 10);
 }
 
 function updateAiDrones(dt) {
@@ -369,20 +483,31 @@ function updateBullets(dt) {
 }
 
 function maybeSpawnEnemy(dt, mission) {
-  if (game.enemies.length >= mission.maxEnemies + game.levelKills * 0.06) return;
+  const ramp = getLevelRamp();
+  const capRamp = easeInOut(ramp);
+  const startCap = Math.max(3, Math.floor(mission.maxEnemies * 0.45));
+  const activeCap = Math.floor(lerp(startCap, mission.maxEnemies, capRamp) + game.levelKills * 0.025);
+  if (game.enemies.length >= activeCap) return;
   if (game.waveClock > 0) return;
-  const pressure = 1 + game.levelKills / Math.max(12, mission.quota);
-  game.waveClock = mission.spawn / pressure;
+  const startSpawn = mission.spawn * 2.25;
+  const endSpawn = mission.spawn * 0.72;
+  game.waveClock = lerp(startSpawn, endSpawn, capRamp);
   const roll = Math.random();
-  if (mission.enemy === "drone") spawnEnemy("drone");
-  if (mission.enemy === "ground") spawnEnemy(roll < 0.55 ? "tank" : "launcher");
-  if (mission.enemy === "mixed") spawnEnemy(roll < 0.35 ? "fighter" : roll < 0.7 ? "drone" : "launcher");
-  if (mission.enemy === "mountain") spawnEnemy(roll < 0.32 ? "fighter" : roll < 0.58 ? "drone" : "launcher");
+  if (mission.enemy === "drone") spawnEnemy("drone", ramp);
+  if (mission.enemy === "ground") spawnEnemy(roll < lerp(0.82, 0.48, ramp) ? "tank" : "launcher", ramp);
+  if (mission.enemy === "mixed") spawnEnemy(roll < lerp(0.72, 0.28, ramp) ? "drone" : roll < lerp(0.92, 0.62, ramp) ? "fighter" : "launcher", ramp);
+  if (mission.enemy === "mountain") spawnEnemy(roll < lerp(0.66, 0.26, ramp) ? "drone" : roll < lerp(0.9, 0.56, ramp) ? "fighter" : "launcher", ramp);
+  if (mission.enemy === "canyon") spawnEnemy(roll < lerp(0.72, 0.34, ramp) ? "drone" : roll < lerp(0.92, 0.67, ramp) ? "launcher" : "fighter", ramp);
+  if (mission.enemy === "fortress") spawnEnemy(roll < lerp(0.78, 0.32, ramp) ? "tank" : roll < lerp(0.96, 0.7, ramp) ? "launcher" : "fighter", ramp);
+  if (mission.enemy === "swarm") spawnEnemy(roll < lerp(0.86, 0.58, ramp) ? "drone" : roll < lerp(0.97, 0.83, ramp) ? "fighter" : "launcher", ramp);
   if (mission.enemy === "asteroid") spawnEnemy("asteroid");
-  if (mission.enemy === "alien") spawnEnemy(roll < 0.56 ? "asteroid" : "alien");
+  if (mission.enemy === "comet") spawnEnemy(roll < lerp(0.92, 0.62, ramp) ? "asteroid" : "alien", ramp);
+  if (mission.enemy === "alien") spawnEnemy(roll < lerp(0.78, 0.48, ramp) ? "asteroid" : "alien", ramp);
+  if (mission.enemy === "mothership") spawnEnemy(roll < lerp(0.44, 0.34, ramp) ? "alien" : roll < lerp(0.74, 0.6, ramp) ? "fighter" : roll < lerp(0.92, 0.78, ramp) ? "launcher" : "asteroid", ramp);
+  if (mission.enemy === "singularity") spawnEnemy(roll < lerp(0.38, 0.24, ramp) ? "alien" : roll < lerp(0.62, 0.46, ramp) ? "asteroid" : roll < lerp(0.78, 0.64, ramp) ? "fighter" : roll < lerp(0.92, 0.82, ramp) ? "drone" : "launcher", ramp);
 }
 
-function spawnEnemy(type) {
+function spawnEnemy(type, ramp = getLevelRamp()) {
   const edge = Math.floor(Math.random() * 4);
   const pos = [
     { x: -30, y: Math.random() * canvas.height },
@@ -394,7 +519,7 @@ function spawnEnemy(type) {
   const speedMap = { drone: 90, tank: 35, launcher: 42, fighter: 150, asteroid: 80, alien: 190 };
   const radiusMap = { drone: 17, tank: 23, launcher: 25, fighter: 22, asteroid: rand(26, 54), alien: 24 };
   const hpMap = { drone: 1, tank: 3, launcher: 2, fighter: 2, asteroid: 2, alien: 3 };
-  const speed = speedMap[type] * rand(0.82, 1.28) * (1 + game.level * 0.06);
+  const speed = speedMap[type] * rand(0.78, 1.18 + ramp * 0.18) * (1 + game.level * 0.035 + ramp * 0.2);
   game.enemies.push({
     type,
     x: pos.x,
@@ -472,14 +597,53 @@ function updateArtifacts(dt) {
   }
 }
 
-function maybeSpawnArtifact() {
-  if (game.artifactClock > 0 || game.artifacts.length) return;
-  const pressure = game.enemies.length + game.enemyBullets.length * 0.4;
-  if (pressure < 5 && Math.random() > 0.25) {
-    game.artifactClock = 3;
-    return;
+function updateFlares(dt) {
+  for (const flare of game.flares) {
+    flare.x += flare.vx * dt;
+    flare.y += flare.vy * dt;
+    flare.vx *= Math.pow(0.64, dt);
+    flare.vy *= Math.pow(0.64, dt);
+    flare.life -= dt;
+    flare.pulse += dt * 12;
+    wrap(flare);
   }
+  game.flares = game.flares.filter(flare => flare.life > 0);
+}
+
+function maybeSpawnPowerups() {
+  const pressure = game.enemies.length + game.enemyBullets.length * 0.4;
+  const ramp = getLevelRamp();
+  const danger = clamp((pressure - 3) / 12 + ramp * 0.55, 0, 1);
+  if (game.artifactClock <= 0 && !game.artifacts.some(artifact => artifact.type === "ai")) {
+    if (danger < 0.18 && Math.random() > 0.35) {
+      game.artifactClock = 3.5;
+    } else {
+      spawnPowerup("ai");
+      game.artifactClock = rand(lerp(26, 13, ramp), lerp(38, 20, ramp));
+    }
+  }
+  if (game.empArtifactClock <= 0 && !game.artifacts.some(artifact => artifact.type === "emp")) {
+    if (danger < 0.32 && Math.random() > 0.22) {
+      game.empArtifactClock = 5;
+    } else {
+      spawnPowerup("emp");
+      game.empArtifactClock = rand(lerp(34, 18, ramp), lerp(50, 28, ramp));
+    }
+  }
+  if (game.shieldArtifactClock <= 0 && !game.artifacts.some(artifact => artifact.type === "shield")) {
+    const hullNeed = game.player.hull < 62;
+    if (!hullNeed && danger < 0.42 && Math.random() > 0.18) {
+      game.shieldArtifactClock = 6;
+    } else {
+      spawnPowerup("shield");
+      game.shieldArtifactClock = rand(lerp(42, 20, ramp), lerp(58, 32, ramp));
+    }
+  }
+}
+
+function spawnPowerup(type) {
   game.artifacts.push({
+    type,
     x: rand(110, canvas.width - 110),
     y: rand(90, canvas.height - 90),
     vx: rand(-32, 32),
@@ -487,16 +651,17 @@ function maybeSpawnArtifact() {
     radius: 24,
     pulse: 0
   });
-  game.artifactClock = rand(15, 24);
 }
 
 function askQuestion() {
   ui.quizOverlay.classList.add("active");
-  const available = questions.filter((_, index) => !game.askedDebriefQuestions.includes(index));
+  const unavailable = new Set([...game.usedQuestionIndexes, ...game.askedDebriefQuestions]);
+  const available = questions.filter((_, index) => !unavailable.has(index));
   const pool = available.length ? available : questions;
   const question = pool[Math.floor(Math.random() * pool.length)];
   const questionIndex = questions.indexOf(question);
   game.askedDebriefQuestions.push(questionIndex);
+  if (!game.usedQuestionIndexes.includes(questionIndex)) game.usedQuestionIndexes.push(questionIndex);
   game.activeQuestion = question;
   const number = 4 - game.debriefQuestionsLeft;
   ui.questionText.textContent = `Question ${number}/3: ${question.q}`;
@@ -536,7 +701,7 @@ function answerQuestion(correct) {
 }
 
 function updateMountains(dt) {
-  if (game.level !== 3) return;
+  if (!missions[game.level].mountains) return;
   for (const mountain of game.mountains) {
     mountain.x -= (80 + game.levelKills * 0.9) * dt;
     if (mountain.x < -mountain.width) {
@@ -579,7 +744,10 @@ function handleCollisions() {
 
   for (const enemy of game.enemies) {
     if (distance(player, enemy) < player.radius + enemy.radius) {
-      if (player.aiTimer > 0) {
+      if (player.shieldTimer > 0) {
+        damageEnemy(enemy, 4);
+        burst(enemy.x, enemy.y, "#82f7b5", 20);
+      } else if (player.aiTimer > 0) {
         damageEnemy(enemy, 4);
         burst(enemy.x, enemy.y, "#61d9ff", 18);
       } else {
@@ -591,11 +759,19 @@ function handleCollisions() {
 
   for (const bullet of game.enemyBullets) {
     if (bullet.missile) {
-      const angle = Math.atan2(player.y - bullet.y, player.x - bullet.x);
+      const target = getMissileTarget(bullet);
+      const angle = Math.atan2(target.y - bullet.y, target.x - bullet.x);
       const targetVx = Math.cos(angle) * 255;
       const targetVy = Math.sin(angle) * 255;
       bullet.vx += (targetVx - bullet.vx) * 0.025;
       bullet.vy += (targetVy - bullet.vy) * 0.025;
+      for (const flare of game.flares) {
+        if (bullet.life > 0 && distance(bullet, flare) < bullet.radius + flare.radius) {
+          bullet.life = 0;
+          flare.life = Math.min(flare.life, 0.18);
+          burst(flare.x, flare.y, "#ffb86b", 16);
+        }
+      }
     }
     if (distance(player, bullet) < player.radius + bullet.radius) {
       bullet.life = 0;
@@ -606,11 +782,26 @@ function handleCollisions() {
   for (const artifact of game.artifacts) {
     if (distance(player, artifact) < player.radius + artifact.radius) {
       artifact.collected = true;
-      player.aiTimer = 10;
-      player.drones.length = 0;
-      game.message = "AI artifact captured: drone guard online for 10 seconds";
+      let burstColor = "#61d9ff";
+      if (artifact.type === "emp") {
+        triggerEmp(2);
+        game.score += 150;
+        game.message = "EMP core captured: shockwave released";
+        burstColor = "#ffd36e";
+      } else if (artifact.type === "shield") {
+        player.shieldTimer = 8;
+        player.invincible = Math.max(player.invincible, 8);
+        player.hull = Math.min(100, player.hull + 18);
+        game.score += 100;
+        game.message = "Shield core captured: barrier online";
+        burstColor = "#82f7b5";
+      } else {
+        player.aiTimer = 10;
+        player.drones.length = 0;
+        game.message = "AI artifact captured: drone guard online for 10 seconds";
+      }
       game.messageClock = 3;
-      burst(artifact.x, artifact.y, "#61d9ff", 44);
+      burst(artifact.x, artifact.y, burstColor, 44);
     }
   }
   game.artifacts = game.artifacts.filter(a => !a.collected);
@@ -666,7 +857,7 @@ function splitAsteroid(enemy) {
 
 function hurtPlayer(amount) {
   const player = game.player;
-  if (player.invincible > 0) return;
+  if (player.invincible > 0 || player.shieldTimer > 0) return;
   player.hull = Math.max(0, player.hull - amount);
   player.invincible = 0.65;
   game.shake = 12;
@@ -686,9 +877,11 @@ function loseLife() {
   player.vx = 0;
   player.vy = 0;
   player.aiTimer = 0;
+  player.shieldTimer = 0;
   player.drones.length = 0;
   player.invincible = 2.6;
   game.enemyBullets.length = 0;
+  game.flares.length = 0;
   game.message = `Life lost. ${game.lives} remaining.`;
   game.messageClock = 3;
   syncUi();
@@ -707,8 +900,10 @@ function startLevelDebrief(nextLevel) {
   game.askedDebriefQuestions = [];
   game.enemies.length = 0;
   game.enemyBullets.length = 0;
+  game.flares.length = 0;
   game.artifacts.length = 0;
   game.player.aiTimer = 0;
+  game.player.shieldTimer = 0;
   game.player.drones.length = 0;
   game.score += 1000 + game.level * 250;
   game.message = `Mission ${game.level + 1} complete: debrief questions`;
@@ -752,6 +947,7 @@ function draw() {
   drawMountains();
   drawArtifacts();
   drawEnemies();
+  drawFlares();
   drawBullets();
   drawPlayer();
   drawParticles();
@@ -776,8 +972,8 @@ function drawBackground(mission) {
 }
 
 function getMissionBackground() {
-  if (game.level === 3) return images.bgMountains;
-  if (game.level >= 4) return images.bgOrbit;
+  if (missions[game.level].mountains) return images.bgMountains;
+  if (game.level >= 7) return images.bgOrbit;
   if (game.level >= 1) return images.bgBattlefield;
   return images.bgAtmosphere;
 }
@@ -785,7 +981,7 @@ function getMissionBackground() {
 function drawStarfield() {
   for (const star of stars) {
     const pulse = Math.sin(game.time * 1.7 + star.p) * 0.35 + 0.65;
-    ctx.fillStyle = `rgba(230, 249, 255, ${game.level >= 4 ? pulse : pulse * 0.38})`;
+    ctx.fillStyle = `rgba(230, 249, 255, ${game.level >= 7 ? pulse : pulse * 0.38})`;
     ctx.beginPath();
     ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
     ctx.fill();
@@ -820,6 +1016,22 @@ function drawPlayer() {
   ctx.lineTo(12, 25);
   ctx.fill();
   ctx.restore();
+
+  if (p.shieldTimer > 0) {
+    const pulse = Math.sin(game.time * 10) * 4;
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.strokeStyle = "#82f7b5";
+    ctx.fillStyle = "rgba(130, 247, 181, 0.08)";
+    ctx.shadowColor = "#82f7b5";
+    ctx.shadowBlur = 22;
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.arc(0, 0, 52 + pulse, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+    ctx.restore();
+  }
 
   for (const drone of p.drones) {
     ctx.save();
@@ -941,15 +1153,44 @@ function drawBullets() {
   ctx.shadowBlur = 0;
 }
 
+function drawFlares() {
+  for (const flare of game.flares) {
+    const alpha = clamp(flare.life / flare.maxLife, 0, 1);
+    const glow = flare.radius + Math.sin(flare.pulse) * 2;
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.shadowColor = "#ffb86b";
+    ctx.shadowBlur = 24;
+    ctx.fillStyle = "#ffd36e";
+    ctx.beginPath();
+    ctx.arc(flare.x, flare.y, glow, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = "rgba(255, 104, 70, 0.5)";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(flare.x, flare.y);
+    ctx.lineTo(flare.x - flare.vx * 0.08, flare.y - flare.vy * 0.08);
+    ctx.stroke();
+    ctx.restore();
+  }
+  ctx.shadowBlur = 0;
+  ctx.globalAlpha = 1;
+}
+
 function drawArtifacts() {
   for (const artifact of game.artifacts) {
     const pulse = Math.sin(artifact.pulse) * 4;
+    const isEmp = artifact.type === "emp";
+    const isShield = artifact.type === "shield";
+    const color = isEmp ? "#ffd36e" : isShield ? "#82f7b5" : "#61d9ff";
+    const fill = isEmp ? "rgba(255, 211, 110, 0.14)" : isShield ? "rgba(130, 247, 181, 0.14)" : "rgba(97, 217, 255, 0.13)";
+    const label = isEmp ? "EMP" : isShield ? "SHD" : "AI";
     ctx.save();
     ctx.translate(artifact.x, artifact.y);
-    ctx.shadowColor = "#61d9ff";
+    ctx.shadowColor = color;
     ctx.shadowBlur = 30;
-    ctx.strokeStyle = "#61d9ff";
-    ctx.fillStyle = "rgba(97, 217, 255, 0.13)";
+    ctx.strokeStyle = color;
+    ctx.fillStyle = fill;
     ctx.lineWidth = 3;
     ctx.beginPath();
     for (let i = 0; i < 6; i += 1) {
@@ -963,16 +1204,16 @@ function drawArtifacts() {
     ctx.fill();
     ctx.stroke();
     ctx.fillStyle = "#e9fdff";
-    ctx.font = "900 17px Inter, sans-serif";
+    ctx.font = `900 ${isEmp || isShield ? 14 : 17}px Inter, sans-serif`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillText("AI", 0, 1);
+    ctx.fillText(label, 0, 1);
     ctx.restore();
   }
 }
 
 function drawMountains() {
-  if (game.level !== 3) return;
+  if (!missions[game.level].mountains) return;
   for (const mountain of game.mountains) {
     ctx.fillStyle = "rgba(91, 104, 106, 0.88)";
     ctx.strokeStyle = "rgba(224, 247, 255, 0.22)";
@@ -1103,12 +1344,37 @@ function nearest(origin, list) {
   return list.reduce((best, item) => distance(origin, item) < distance(origin, best) ? item : best, list[0]);
 }
 
+function getMissileTarget(missile) {
+  if (!game.flares.length) return game.player;
+  const flare = nearest(missile, game.flares);
+  return distance(missile, flare) < 520 ? flare : game.player;
+}
+
 function limitVelocity(body, max) {
   const speed = Math.hypot(body.vx, body.vy);
   if (speed > max) {
     body.vx = body.vx / speed * max;
     body.vy = body.vy / speed * max;
   }
+}
+
+function getLevelRamp() {
+  const mission = missions[game.level];
+  if (!mission) return 0;
+  return clamp(game.levelKills / Math.max(1, mission.quota), 0, 1);
+}
+
+function easeInOut(value) {
+  const t = clamp(value, 0, 1);
+  return t * t * (3 - 2 * t);
+}
+
+function lerp(start, end, amount) {
+  return start + (end - start) * clamp(amount, 0, 1);
+}
+
+function clamp(value, min, max) {
+  return Math.max(min, Math.min(max, value));
 }
 
 function rand(min, max) {
